@@ -39,4 +39,3 @@ else:
     for i, (msg, timestamp) in enumerate(st.session_state.messages):
         st.write(f"{i+1}. {msg} (投稿日時: {timestamp})")
 
-
