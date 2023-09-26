@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import pytz
 
 # ページタイトル
 st.title("掲示板アプリ")
@@ -19,7 +20,7 @@ message = st.text_area("新しいメッセージを入力してください:")
 # メッセージを投稿
 if st.button("投稿"):
     if message:
-        now = datetime.now()
+        now = datetime.now(pytz.timezone('Asia/Tokyo'))
         formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
         st.session_state.messages.append((message, formatted_date))
         st.text("メッセージが投稿されました！")
