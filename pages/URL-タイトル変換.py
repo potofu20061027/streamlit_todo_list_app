@@ -1,10 +1,15 @@
+import streamlit as st
 import requests
 from bs4 import BeautifulSoup
-import streamlit as st
 
+# Streamlitアプリケーションのタイトルを設定
+st.title("ウェブページタイトル取得アプリ")
 
-# URLを入力として受け取る関数
-def get_webpage_title(url):
+# URLを入力するウィジェット
+url = st.text_input("ウェブページのURLを入力してください:")
+
+# タイトルを表示するコールバック
+if url:
     try:
         # URLからウェブページのHTMLを取得
         response = requests.get(url)
@@ -16,17 +21,16 @@ def get_webpage_title(url):
         # タイトルタグからタイトルを取得
         title = soup.title.string
 
-        return title
+        # タイトルを表示
+        st.subheader("ウェブページのタイトル:")
+        st.write(title)
 
     except requests.exceptions.RequestException as e:
-        return f"エラー: {e}"
+        # エラーが発生した場合のメッセージ
+        st.error(f"エラー: {e}")
 
-# ユーザーからURLを入力してもらう
-url = st.text_input("URLを入力してください。")
-
-
-# タイトルを取得して表示
-title = get_webpage_title(url)
-st.write(title)
+# Streamlitアプリケーションを実行
+if __name__ == "__main__":
+    st.run()
 
 
