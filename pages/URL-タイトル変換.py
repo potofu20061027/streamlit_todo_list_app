@@ -29,8 +29,5 @@ if url:
         # エラーが発生した場合のメッセージ
         st.error(f"エラー: {e}")
 
-# Streamlitアプリケーションを実行
-if __name__ == "__main__":
-    st.run()
 
 
