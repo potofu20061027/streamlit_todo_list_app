@@ -4,7 +4,7 @@ import datetime
 import pytz
 
 # ページタイトル
-st.title("掲示板アプリ")
+st.title("掲示板")
 
 
 import streamlit as st
