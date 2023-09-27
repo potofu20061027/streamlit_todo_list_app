@@ -30,7 +30,7 @@ if st.button("投稿する"):
         todo_list6 = get_todo_data6()
         time = get_time()
         # 新しいタスクを追加
-        todo_list6.append({"掲示板":task, "投稿時間":now})
+        todo_list6.append({"投稿一覧":task, "投稿時間":now})
         # データを更新
         st.write("投稿しました！")
         # タスクリストを表示
