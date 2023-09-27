@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-
 @st.cache_resource
 def get_todo_data():
     return[]

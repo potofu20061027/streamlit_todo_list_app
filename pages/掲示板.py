@@ -1,43 +1,54 @@
 import streamlit as st
 import pandas as pd
-from datetime import datetime
+import datetime
 import pytz
 
 # ページタイトル
 st.title("掲示板アプリ")
-st.subheader("一人で2chができる")
 
 
-# メッセージデータの初期化（初回のみ）
+import streamlit as st
+import pandas as pd
+
+@st.cache_resource
+def get_todo_data6():
+    return[]
 @st.cache_data
-def initialize_messages():
-    return []
+def get_time():
+    return[]
 
-if 'messages' not in st.session_state:
-    st.session_state.messages = initialize_messages()
+# ページタイトル
+st.title("掲示板")
 
-# メッセージ入力フィールド
-message = st.text_area("新しいメッセージを入力してください:")
-
-# メッセージを投稿
-if st.button("投稿"):
-    if message:
-        now = datetime.now(pytz.timezone('Asia/Tokyo'))
-        formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
-        st.session_state.messages.append((message, formatted_date))
-        st.text("メッセージが投稿されました！")
-
-# メッセージ一覧
-st.header("メッセージ一覧")
-if not st.session_state.messages:
-    st.write("まだメッセージはありません。")
+#メモを入力
+task = st.text_input("投稿")
+now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
+# 追加ボタンがクリックされた場合
+if st.button("投稿する"):
+    if task:
+        # データを取得
+        todo_list6 = get_todo_data6()
+        time = get_time()
+        # 新しいタスクを追加
+        todo_list6.append({"掲示板":task, "投稿時間":now})
+        # データを更新
+        st.write("投稿しました！")
+        # タスクリストを表示
+        df = pd.DataFrame(todo_list6)
+# タスクリストを表示
+todo_list6 = get_todo_data6()
+if not todo_list6:
+    st.write("投稿はまだありません。")
 else:
-    selected_index = st.selectbox("削除するメッセージを選んでください:", [f"{i+1}. {msg[0]} ({msg[1]})" for i, msg in enumerate(st.session_state.messages)])
-    
-    if st.button("選択したメッセージを削除"):
-        selected_index = int(selected_index.split(".")[0]) - 1
-        del st.session_state.messages[selected_index]
+    df = pd.DataFrame(todo_list6)
+    st.table(df)
 
-    for i, (msg, timestamp) in enumerate(st.session_state.messages):
-        st.write(f"{i+1}. {msg} (投稿日時: {timestamp})")
-
+if todo_list6:    
+    delete_index = st.number_input("削除する投稿の番号を選択", min_value=0, max_value=len(todo_list6))
+    if st.button("削除"):
+        if delete_index >= 0 and delete_index <= len(todo_list6):
+            del todo_list6[delete_index]  # 選択された項目を削除
+            st.write(f"投稿 {delete_index} を削除しました。")
+            # タスクリストを表示
+            df = pd.DataFrame(todo_list6)
+            st.table(df,now)
