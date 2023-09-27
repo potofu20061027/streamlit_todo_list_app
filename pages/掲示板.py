@@ -5,6 +5,8 @@ import pytz
 
 # ページタイトル
 st.title("掲示板アプリ")
+st.subheader("一人で2chができる")
+
 
 # メッセージデータの初期化（初回のみ）
 @st.cache_data
