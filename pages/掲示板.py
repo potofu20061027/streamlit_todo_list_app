@@ -48,7 +48,7 @@ if todo_list6:
     if st.button("削除"):
         if delete_index >= 0 and delete_index <= len(todo_list6):
             del todo_list6[delete_index]  # 選択された項目を削除
-            st.write(f"投稿 {delete_index} を削除しました。")
+            st.write(f"選択した投稿を削除しました。")
             # タスクリストを表示
             df = pd.DataFrame(todo_list6)
             st.table(df)
