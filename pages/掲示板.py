@@ -51,4 +51,4 @@ if todo_list6:
             st.write(f"投稿 {delete_index} を削除しました。")
             # タスクリストを表示
             df = pd.DataFrame(todo_list6)
-            st.table(df,now)
+            st.table(df)
