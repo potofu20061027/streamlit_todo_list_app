@@ -17,9 +17,6 @@ def get_todo_data6():
 def get_time():
     return[]
 
-# ページタイトル
-st.title("掲示板")
-
 #メモを入力
 task = st.text_input("投稿")
 now = datetime.datetime.now(pytz.timezone('Asia/Tokyo'))
